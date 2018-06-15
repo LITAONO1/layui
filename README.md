@@ -117,3 +117,6 @@ layui.use(['layer', 'form'], function(){
 
 ## 相关
 [官网](http://www.layui.com/)、[更新日志](http://www.layui.com/doc/base/changelog.html)、[社区交流](http://fly.layui.com)
+
+## table 返回数据问题
+https://blog.csdn.net/sq574146616/article/details/80502911
