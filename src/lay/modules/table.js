@@ -3,6 +3,15 @@
  @Name：layui.table 表格操作
  @Author：贤心
  @License：MIT
+ 
+ responseHandler: function (res) {  
+    // 可进行数据操作  
+    return {  
+        "count": res.data.count,  
+        "data": res.data.companyList,  
+        "code": res.code == 200 ? 0 : -1 //code值为200表示成功  
+    };  
+},  
     
  */
  
@@ -426,6 +435,15 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function(exports){
         ,dataType: 'json'
         ,headers: options.headers || {}
         ,success: function(res){
+         
+         // 加入这部分！！！  
+         // 临时解决layui的table组件中response选项不支持多层级获取接口数据的方法  
+         // ----------------开始---------------------  
+         if (typeof options.responseHandler == "function") {  
+             res = options.responseHandler(res);  
+         }  
+         // ----------------结束---------------------  
+         
           if(res[response.statusName] != response.statusCode){
             that.renderForm();
             that.layMain.html('<div class="'+ NONE +'">'+ (res[response.msgName] || '返回的数据状态异常') +'</div>');
